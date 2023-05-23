@@ -1,0 +1,25 @@
+version: '3'
+services:
+  www:
+    image: php:apache
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - 80:80
+      - 443:443
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=db_perpustakaan
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    volumes:
+      - "./db:/db-1.d"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8010:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT =3306
